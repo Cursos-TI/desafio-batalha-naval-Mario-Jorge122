@@ -5,7 +5,7 @@ int main() {
     // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
 
     int tabuleiro[10][10];
-    char linha[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+    char linha[10] = {'V', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'K', 'M'};
 
 // Inicializa o tabuleiro com água (0)
     for (int i = 0; i < 10; i++){
@@ -16,9 +16,11 @@ int main() {
 // Posiciona os navios
     int navio1[3] = {3, 3, 3};
     int navio2[3] = {3, 3, 3};
+    int naviodiagonal1[3] = {3, 3, 3};
+    int naviodiagonal2[3] = {3, 3, 3};
 
 // Navio horizontal
-    int linha1 = 2, coluna1 = 3;
+    int linha1 = 0, coluna1 = 2;
     for (int i = 0; i < 3; i++){
         tabuleiro[linha1][coluna1 + i] = navio1[i];
     }
@@ -29,14 +31,26 @@ int main() {
         tabuleiro[linha2 +i][coluna2] = navio2[i];
     }
 
+    //Navio diagonal (esquerda pra direita descendo)
+    int linhadiag1 = 0, colunadiag1 = 0;
+    for (int i = 0; i < 3; i++){
+        tabuleiro[linhadiag1 + i][colunadiag1 + i] = naviodiagonal1[i];
+    }
+
+    //Navio diagonal (esquerda pra direita subindo)
+    int linhadiag2 = 7, colunadiag2 = 2;
+    for (int i = 0; i < 3; i++){
+        tabuleiro[linhadiag2 - i][colunadiag2 + i] = naviodiagonal2[i];
+    }
+
 // Exibir tabuleiro
-    printf(" 1 2 3 4 5 6 7 8 9 10\n");
+    printf("  1 2 3 4 5 6 7 8 9 10\n");
     for (int i = 0; i < 10; i++){
         printf("%c ", linha[i]);
         for (int j = 0; j < 10; j++){
             printf("%2d ", tabuleiro[i][j]);
         }
-        printf("\n");
+        printf("\r\n");
     }
 
     // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
