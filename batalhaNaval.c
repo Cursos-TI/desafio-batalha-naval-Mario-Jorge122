@@ -5,7 +5,7 @@ int main() {
     // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
 
     int tabuleiro[10][10];
-    char linha[10] = {'V', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'K', 'M'};
+    char linha[10] = {'0', '1', '2', '3', '4', '5','6', '7', '8', '9'};
 
 // Inicializa o tabuleiro com água (0)
     for (int i = 0; i < 10; i++){
@@ -20,13 +20,13 @@ int main() {
     int naviodiagonal2[3] = {3, 3, 3};
 
 // Navio horizontal
-    int linha1 = 0, coluna1 = 2;
+    int linha1 = 9, coluna1 = 0;
     for (int i = 0; i < 3; i++){
         tabuleiro[linha1][coluna1 + i] = navio1[i];
     }
 
 // Navio vertical
-    int linha2 = 5, coluna2 = 6;
+    int linha2 = 7, coluna2 = 9;
     for (int i = 0; i < 3; i++){
         tabuleiro[linha2 +i][coluna2] = navio2[i];
     }
@@ -43,8 +43,36 @@ int main() {
         tabuleiro[linhadiag2 - i][colunadiag2 + i] = naviodiagonal2[i];
     }
 
+    //Navio em forma de cone
+    int linha_cone = 0, coluna_cone = 5;
+    for (int i = 0; i < 3; i++) {
+        for (int j = -i; j <= i; j++) {
+            if (linha_cone + i < 10 && coluna_cone + j >= 0 && coluna_cone + j < 10) {
+                tabuleiro[linha_cone + i][coluna_cone + j] = 3;
+            }
+        }
+    }
+
+    //Navio octaedro
+    int linha_octa = 4, coluna_octa = 5;
+    for (int i = -1; i <= 1; i++){
+        if (linha_octa + i >= 0 && linha_octa + i < 10 && tabuleiro[linha_octa + i][coluna_octa] == 0)
+            tabuleiro[linha_octa + i][coluna_octa] = 4;
+        if (coluna_octa + i >= 0 && coluna_octa + i < 10 && tabuleiro[linha_octa][coluna_octa + i] == 0)
+            tabuleiro[linha_octa][coluna_octa + i] = 4;
+    }
+
+    //Navio em forma de cruz
+    int linha_cruz = 7, coluna_cruz = 5;
+    for (int i = -1; i <= 1; i++){
+        if (coluna_cruz + i >= 0 && coluna_cruz + i < 10 && tabuleiro[linha_cruz][coluna_cruz + i] == 0)
+            tabuleiro[linha_cruz][coluna_cruz + i] = 5;
+        if (linha_cruz + i + 0 && linha_cruz + i < 10 && tabuleiro[linha_cruz + i][coluna_cruz] == 0)
+            tabuleiro[linha_cruz + i][coluna_cruz] = 5;
+    }
+
 // Exibir tabuleiro
-    printf("  1 2 3 4 5 6 7 8 9 10\n");
+    printf("  0 1 2 3 4 5 6 7 8 9\n");
     for (int i = 0; i < 10; i++){
         printf("%c ", linha[i]);
         for (int j = 0; j < 10; j++){
